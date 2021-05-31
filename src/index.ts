@@ -1,1 +1,1 @@
-// export { Blah as default } from './lib'
+export { useFileUpload as default } from './lib/useFileUpload';
