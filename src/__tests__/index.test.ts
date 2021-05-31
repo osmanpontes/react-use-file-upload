@@ -1,5 +1,3 @@
-// import message from '../index';
-
-// it('Works', () => {
-//   expect(message).toBe('This module must not be required!');
-// });
+it('works', () => {
+  expect(1).toBe(1);
+});
