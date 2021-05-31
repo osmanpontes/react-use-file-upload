@@ -1,7 +1,7 @@
 {
   "name": "react-use-file-upload",
   "version": "0.2.0",
-  "description": "React Hook to make file uploading easier.",
+  "description": "A React Hook to make file uploading easier.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
