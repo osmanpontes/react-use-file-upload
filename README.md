@@ -10,9 +10,11 @@ A React Hook to make dealing with files in an upload scenario easier. It extract
 File[]
 ```
 
-An array of File objects
+An array of File objects.
 
 ### fileNames
+
+An array of strings containing the names of all of the files.
 
 ```
 string[]
