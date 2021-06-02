@@ -8,8 +8,8 @@ A React Hook to make dealing with files in an upload scenario easier. It extract
 
 An array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects. When files are attached, they are converted from a FileList, to an array.
 
-```
-type File[]
+```ts
+File[]
 ```
 
 ### fileNames
