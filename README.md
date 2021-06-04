@@ -8,24 +8,8 @@ A React Hook to make dealing with files in an upload scenario easier. It extract
 
 An array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects. When files are attached, they are converted from a FileList, to an array.
 
-```ts
+```
 File[]
-```
-
-### fileNames
-
-An array of strings containing just the names of the files. The same result can also be achieved by mapping through the `files` array, and just extract the `name` property. This property is mainly for convenience, and is here just as a means to help you write less code.
-
-```
-type string[]
-```
-
-### fileTypes
-
-An array of strings containing just the file types. The same result can also be achieved by mapping through the `files` array, and just extract the `type` property. This property is mainly for convenience, and is here just as a means to help you write less code.
-
-```
-string[]
 ```
 
 ### totalSize
@@ -38,7 +22,7 @@ string
 
 ### totalSizeInBytes
 
-A number that represents the size of all of the files.
+A number that represents the size of all of the files in bytes.
 
 ```
 number
