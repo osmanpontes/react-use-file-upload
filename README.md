@@ -6,7 +6,7 @@ A React Hook to make dealing with files in an upload scenario easier. It extract
 
 ### files
 
-An array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects. When files are attached, they are converted from a FileList, to an array.
+An array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
 
 ```
 File[]
@@ -30,15 +30,15 @@ number
 
 ### createFormData
 
-A function that will prepare the `files` to be sent to an external API by creating a new [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object, appending the `files` to it, and returning that same FormData object.
+A function that will prepare the `files` to be sent to an external API by creating a new [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object, appending the `files` to it, and then returning the FormData object.
 
 ```
 () => FormData
 ```
 
-### onFileDrag
+### handleFileDDEvent
 
-A function that prevents you from writing boilerplate code in your input fields.
+A function that prevents you from writing boilerplate code, and will call `e.preventDefault` and `e.stopPropagation` behind the scenes.
 
 ```
 (e) => void
@@ -46,11 +46,15 @@ A function that prevents you from writing boilerplate code in your input fields.
 
 ### removeFile
 
+A function that accepts a number(_index_) or string(_name of the file_) that will be used to remove a specific file from the `files` array.
+
 ```
-(index: number) => void
+(file: number | string) => void
 ```
 
 ### setFiles
+
+A function that accepts a FileList as an argument, and converts it to an array.
 
 ```
 (files: FileList) => void
