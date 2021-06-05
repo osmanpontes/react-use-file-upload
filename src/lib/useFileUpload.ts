@@ -69,7 +69,7 @@ export const useFileUpload = (): useFileUploadHook => {
 
   /** @function removeFile */
   const removeFile = useCallback((file: number | string): void => {
-    if (['number', 'string'].includes(typeof file)) {
+    if (typeof file !== 'number' && typeof file !== 'string') {
       console.error('argument supplied to removeFile must be of type number or string.');
       return;
     }
