@@ -68,18 +68,21 @@ export const useFileUpload = (): useFileUploadHook => {
   };
 
   /** @function removeFile */
-  const removeFile = useCallback((file: number | string): void => {
-    if (typeof file !== 'number' && typeof file !== 'string') {
-      console.error('argument supplied to removeFile must be of type number or string.');
-      return;
-    }
+  const removeFile = useCallback(
+    (file: number | string): void => {
+      if (typeof file !== 'number' && typeof file !== 'string') {
+        console.error('argument supplied to removeFile must be of type number or string.');
+        return;
+      }
 
-    if (typeof file === 'string') {
-      setFilesState(files.filter((_file: File) => _file.name !== file));
-    } else {
-      setFilesState(files.filter((_file: File, i) => i !== file));
-    }
-  }, []);
+      if (typeof file === 'string') {
+        setFilesState(files.filter((_file: File) => _file.name !== file));
+      } else {
+        setFilesState(files.filter((_file: File, i) => i !== file));
+      }
+    },
+    [files],
+  );
 
   /** @function createFormData */
   const createFormData = useCallback((): FormData => {
