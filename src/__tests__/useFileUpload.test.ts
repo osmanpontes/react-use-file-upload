@@ -18,7 +18,7 @@ describe('useFileUpload', () => {
     expect(typeof result.current.createFormData).toBe('function');
     expect(typeof result.current.getFileNames).toBe('function');
     expect(typeof result.current.getFileTypes).toBe('function');
-    expect(typeof result.current.onFileDrag).toBe('function');
+    expect(typeof result.current.handleFileDDEvent).toBe('function');
     expect(typeof result.current.removeFile).toBe('function');
     expect(typeof result.current.setFiles).toBe('function');
   });
