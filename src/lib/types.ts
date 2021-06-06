@@ -1,11 +1,11 @@
 export type useFileUploadHook = {
   files: File[];
+  fileNames: string[];
+  fileTypes: string[];
   totalSize: string;
   totalSizeInBytes: number;
   createFormData: () => FormData;
-  getFileNames: () => string[];
-  getFileTypes: () => string[];
-  handleFileDDEvent: (e: Event) => void;
+  handleDragDropEvent: (e: Event) => void;
   removeFile: (file: number | string) => void;
   setFiles: (files: FileList) => void;
 };

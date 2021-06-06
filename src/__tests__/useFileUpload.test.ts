@@ -9,16 +9,16 @@ describe('useFileUpload', () => {
   it('Its initial values are correct', () => {
     const { result } = renderHook(() => useFileUpload());
     expect(result.current.files).toStrictEqual([]);
+    expect(result.current.fileNames).toStrictEqual([]);
+    expect(result.current.fileTypes).toStrictEqual([]);
     expect(result.current.totalSize).toBe('');
     expect(result.current.totalSizeInBytes).toBe(0);
   });
 
-  it('exports six functions', () => {
+  it('exports four functions', () => {
     const { result } = renderHook(() => useFileUpload());
     expect(typeof result.current.createFormData).toBe('function');
-    expect(typeof result.current.getFileNames).toBe('function');
-    expect(typeof result.current.getFileTypes).toBe('function');
-    expect(typeof result.current.handleFileDDEvent).toBe('function');
+    expect(typeof result.current.handleDragDropEvent).toBe('function');
     expect(typeof result.current.removeFile).toBe('function');
     expect(typeof result.current.setFiles).toBe('function');
   });

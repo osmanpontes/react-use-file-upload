@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useFileUploadHook } from './types';
 
 /**
@@ -23,9 +23,9 @@ const getTotalSizeInBytes = (files: File[]): number => {
 };
 
 /**
- * @function handleFileDDEvent
+ * @function handleDragDropEvent
  */
-const handleFileDDEvent = (e: Event) => {
+const handleDragDropEvent = (e: Event) => {
   e.stopPropagation();
   e.preventDefault();
 };
@@ -35,18 +35,31 @@ const handleFileDDEvent = (e: Event) => {
  */
 export const useFileUpload = (): useFileUploadHook => {
   const [files, setFilesState] = useState<File[]>([]);
+  const [fileNames, setFileNames] = useState<string[]>([]);
+  const [fileTypes, setFileTypes] = useState<string[]>([]);
   const [totalSize, setTotalSize] = useState('');
   const [totalSizeInBytes, setTotalSizeInBytes] = useState(0);
 
+  useEffect(() => {
+    setFileNames(files.map((file) => file.name));
+    setFileTypes(files.map((file) => file.type));
+  }, [files]);
+
   /** @function setFiles */
-  const setFiles = useCallback((files: FileList): void => {
-    if (!(files instanceof FileList)) {
-      console.error('argument supplied to setFiles must be of type: FileList');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const setFiles = useCallback((e: any): void => {
+    let filesArr: File[] = [];
+
+    if (e.currentTarget?.files) {
+      filesArr = Array.from(e.currentTarget.files);
+    } else if (e?.dataTransfer.files) {
+      filesArr = Array.from(e.dataTransfer.files);
     } else {
-      const filesArr: File[] = Array.from(files);
-      setFilesState(filesArr);
-      handleSizes(filesArr);
+      console.error('Argument not recognized. Are you sure your passing setFiles an event object?');
     }
+
+    setFilesState(filesArr);
+    handleSizes(filesArr);
   }, []);
 
   /** @function handleSizes */
@@ -56,16 +69,6 @@ export const useFileUpload = (): useFileUploadHook => {
     setTotalSizeInBytes(sizeInBytes);
     setTotalSize(prettySize);
   }, []);
-
-  /** @function getFileNames */
-  const getFileNames = () => {
-    return files.map((file) => file.name);
-  };
-
-  /** @function getFileTypes */
-  const getFileTypes = () => {
-    return files.map((file) => file.type);
-  };
 
   /** @function removeFile */
   const removeFile = useCallback(
@@ -97,12 +100,12 @@ export const useFileUpload = (): useFileUploadHook => {
 
   return {
     files,
+    fileNames,
+    fileTypes,
     totalSize,
     totalSizeInBytes,
     createFormData,
-    getFileNames,
-    getFileTypes,
-    handleFileDDEvent,
+    handleDragDropEvent,
     removeFile,
     setFiles,
   };
