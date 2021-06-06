@@ -96,6 +96,11 @@ export const useFileUpload = (): useFileUploadHook => {
     [files],
   );
 
+  /** @function clearAll */
+  const clearAll = useCallback((): void => {
+    setFilesState([]);
+  }, []);
+
   /** @function createFormData */
   const createFormData = useCallback((): FormData => {
     const formData = new FormData();
@@ -113,6 +118,7 @@ export const useFileUpload = (): useFileUploadHook => {
     fileTypes,
     totalSize,
     totalSizeInBytes,
+    clearAll,
     createFormData,
     handleDragDropEvent,
     removeFile,

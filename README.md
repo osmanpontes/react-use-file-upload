@@ -44,6 +44,14 @@ A number that represents the size of all of the files in bytes.
 number
 ```
 
+### clearAll
+
+A function that will remove all files in a single swipe.
+
+```
+() => void
+```
+
 ### createFormData
 
 A function that will prepare the `files` to be sent to an external API by creating a new [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object, appending the `files` to it, and then returning the FormData object.
