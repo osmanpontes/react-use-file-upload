@@ -4,45 +4,36 @@ A React Hook to make dealing with files in an upload scenario easier. It extract
 
 ## Example
 
-```
-const Upload = () => {
-  const {
-    files,
-    handleDragDropEvent,
-    clearAllFiles,
-    createFormData,
-    setFiles,
-    fileNames,
-    fileTypes,
-    removeFile
-  } = useFileUpload()
+```js
+import React, { useRef } from 'react';
+import axios from 'axios';
+import useFileUpload from 'react-use-file-upload';
 
-  const inputRef = useRef()
+const Upload = () => {
+  const { files, handleDragDropEvent, clearAllFiles, createFormData, setFiles, fileNames, fileTypes, removeFile } =
+    useFileUpload();
+
+  const inputRef = useRef();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = createFormData()
+    const formData = createFormData();
 
     try {
       axios.post('https://some-api.com', formData, {
-        'content-type': 'multipart/form-data'
-      })
+        'content-type': 'multipart/form-data',
+      });
     } catch (error) {
-      console.error('Failed to submit files.')
+      console.error('Failed to submit files.');
     }
-  }
+  };
 
   return (
     <div css={CSS}>
-      <Global styles={GlobalCSS} />
-
       <h1>Upload Files</h1>
 
-      <p>
-        Please use the form to your right to upload any file(s) of your
-        choosing.
-      </p>
+      <p>Please use the form to your right to upload any file(s) of your choosing.</p>
 
       <form onSubmit={handleSubmit}>
         <div className="form-container">
@@ -77,24 +68,16 @@ const Upload = () => {
             onDragEnter={handleDragDropEvent}
             onDragOver={handleDragDropEvent}
             onDrop={(e) => {
-              handleDragDropEvent(e)
-              setFiles(e, 'a')
+              handleDragDropEvent(e);
+              setFiles(e, 'a');
             }}
           >
             <p>Drag and drop files here</p>
 
-            <button onClick={() => inputRef.current.click()}>
-              Or select files to upload
-            </button>
+            <button onClick={() => inputRef.current.click()}>Or select files to upload</button>
 
             {/* Hide the crappy looking default HTML input */}
-            <input
-              ref={inputRef}
-              type="file"
-              multiple
-              style={{ display: 'none' }}
-              onChange={(e) => setFiles(e, 'a')}
-            />
+            <input ref={inputRef} type="file" multiple style={{ display: 'none' }} onChange={(e) => setFiles(e, 'a')} />
           </div>
         </div>
 
@@ -103,8 +86,8 @@ const Upload = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 ```
 
 ## API
