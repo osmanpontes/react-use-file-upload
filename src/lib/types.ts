@@ -4,7 +4,7 @@ export type useFileUploadHook = {
   fileTypes: string[];
   totalSize: string;
   totalSizeInBytes: number;
-  clearAll: () => void;
+  clearAllFiles: () => void;
   createFormData: () => FormData;
   handleDragDropEvent: (e: Event) => void;
   removeFile: (file: number | string) => void;

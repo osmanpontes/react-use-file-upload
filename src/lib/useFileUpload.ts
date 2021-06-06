@@ -96,8 +96,8 @@ export const useFileUpload = (): useFileUploadHook => {
     [files],
   );
 
-  /** @function clearAll */
-  const clearAll = useCallback((): void => {
+  /** @function clearAllFiles */
+  const clearAllFiles = useCallback((): void => {
     setFilesState([]);
   }, []);
 
@@ -118,7 +118,7 @@ export const useFileUpload = (): useFileUploadHook => {
     fileTypes,
     totalSize,
     totalSizeInBytes,
-    clearAll,
+    clearAllFiles,
     createFormData,
     handleDragDropEvent,
     removeFile,

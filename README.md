@@ -44,9 +44,9 @@ A number that represents the size of all of the files in bytes.
 number
 ```
 
-### clearAll
+### clearAllFiles
 
-A function that will remove all files in a single swipe.
+A function that will remove all files in the `files` array.
 
 ```
 () => void

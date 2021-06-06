@@ -17,7 +17,7 @@ describe('useFileUpload', () => {
 
   it('exports five functions', () => {
     const { result } = renderHook(() => useFileUpload());
-    expect(typeof result.current.clearAll).toBe('function');
+    expect(typeof result.current.clearAllFiles).toBe('function');
     expect(typeof result.current.createFormData).toBe('function');
     expect(typeof result.current.handleDragDropEvent).toBe('function');
     expect(typeof result.current.removeFile).toBe('function');
