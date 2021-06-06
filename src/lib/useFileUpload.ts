@@ -43,6 +43,7 @@ export const useFileUpload = (): useFileUploadHook => {
   useEffect(() => {
     setFileNames(files.map((file) => file.name));
     setFileTypes(files.map((file) => file.type));
+    handleSizes(files);
   }, [files]);
 
   /** @function setFiles */
@@ -61,11 +62,8 @@ export const useFileUpload = (): useFileUploadHook => {
 
       if (mode === 'w') {
         setFilesState(filesArr);
-        handleSizes(filesArr);
       } else if (mode === 'a') {
-        const _files = [...files, ...filesArr];
-        setFilesState(_files);
-        handleSizes(_files);
+        setFilesState([...files, ...filesArr]);
       }
     },
     [files],
