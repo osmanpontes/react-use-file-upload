@@ -47,20 +47,29 @@ export const useFileUpload = (): useFileUploadHook => {
 
   /** @function setFiles */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const setFiles = useCallback((e: any): void => {
-    let filesArr: File[] = [];
+  const setFiles = useCallback(
+    (e: any, mode = 'w'): void => {
+      let filesArr: File[] = [];
 
-    if (e.currentTarget?.files) {
-      filesArr = Array.from(e.currentTarget.files);
-    } else if (e?.dataTransfer.files) {
-      filesArr = Array.from(e.dataTransfer.files);
-    } else {
-      console.error('Argument not recognized. Are you sure your passing setFiles an event object?');
-    }
+      if (e.currentTarget?.files) {
+        filesArr = Array.from(e.currentTarget.files);
+      } else if (e?.dataTransfer.files) {
+        filesArr = Array.from(e.dataTransfer.files);
+      } else {
+        console.error('Argument not recognized. Are you sure your passing setFiles an event object?');
+      }
 
-    setFilesState(filesArr);
-    handleSizes(filesArr);
-  }, []);
+      if (mode === 'w') {
+        setFilesState(filesArr);
+        handleSizes(filesArr);
+      } else if (mode === 'a') {
+        const _files = [...files, ...filesArr];
+        setFilesState(_files);
+        handleSizes(_files);
+      }
+    },
+    [files],
+  );
 
   /** @function handleSizes */
   const handleSizes = useCallback((files: File[]): void => {

@@ -70,8 +70,8 @@ A function that accepts a number(_index_) or string(_name of the file_) that wil
 
 ### setFiles
 
-A function that accepts the event emitted from the input field or drop zone, and creates an array of File objects.
+A function that accepts the event emitted from the input field or drop zone, and creates an array of File objects. The default mode is set to, `w`, which means it will write over previous files each time new ones are attached. If you want previously attached files to not be deleted each time a user attaches new files, then you can opt in by calling setFiles like this, `setFiles(e, 'a')`, where the `a` stands for append. If you want the default behavior, there is no need to pass a second argument to this function.
 
 ```
-(e: Event) => void
+(e: Event, mode = 'w') => void
 ```
