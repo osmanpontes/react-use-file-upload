@@ -2,11 +2,116 @@
 
 A React Hook to make dealing with files in an upload scenario easier. It extracts away a lot of the boilerplate that comes with allowing users to add their own files to your web application.
 
+## Example
+
+```
+const Upload = () => {
+  const {
+    files,
+    handleDragDropEvent,
+    clearAllFiles,
+    createFormData,
+    setFiles,
+    fileNames,
+    fileTypes,
+    removeFile
+  } = useFileUpload()
+
+  const inputRef = useRef()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const formData = createFormData()
+
+    try {
+      axios.post('https://some-api.com', formData, {
+        'content-type': 'multipart/form-data'
+      })
+    } catch (error) {
+      console.error('Failed to submit files.')
+    }
+  }
+
+  return (
+    <div css={CSS}>
+      <Global styles={GlobalCSS} />
+
+      <h1>Upload Files</h1>
+
+      <p>
+        Please use the form to your right to upload any file(s) of your
+        choosing.
+      </p>
+
+      <form onSubmit={handleSubmit}>
+        <div className="form-container">
+          {/* Display the files to be uploaded */}
+          <div css={ListCSS}>
+            <ul>
+              {fileNames.map((name) => (
+                <li key={name}>
+                  <span>{name}</span>
+
+                  <span onClick={() => removeFile(name)}>
+                    <i className="fa fa-times" />
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            {files.length > 0 && (
+              <div>
+                <span>File types found: {fileTypes.join(', ')}</span>
+
+                <div className="clear-all">
+                  <button onClick={() => clearAllFiles()}>Clear All</button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Provide a drop zone and an alternative button inside it to upload files. */}
+          <div
+            css={DropzoneCSS}
+            onDragEnter={handleDragDropEvent}
+            onDragOver={handleDragDropEvent}
+            onDrop={(e) => {
+              handleDragDropEvent(e)
+              setFiles(e, 'a')
+            }}
+          >
+            <p>Drag and drop files here</p>
+
+            <button onClick={() => inputRef.current.click()}>
+              Or select files to upload
+            </button>
+
+            {/* Hide the crappy looking default HTML input */}
+            <input
+              ref={inputRef}
+              type="file"
+              multiple
+              style={{ display: 'none' }}
+              onChange={(e) => setFiles(e, 'a')}
+            />
+          </div>
+        </div>
+
+        <div className="submit">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  )
+}
+```
+
 ## API
 
 ### files
 
-An array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
+An array of [File](https://developer.mozilla.org/en-US/docs/Web/API/File) objects. if you need access to multiple properties of a File at a time, use this array instead of `fileNames` and `fileTypes`, which are mainly included in this hook for convenience.
 
 ```
 File[]
