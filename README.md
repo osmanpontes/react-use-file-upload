@@ -90,6 +90,12 @@ const Upload = () => {
 };
 ```
 
+Here is a photo of the example app above:
+  
+  
+![example](https://user-images.githubusercontent.com/19492185/121057341-2b8e6300-c78d-11eb-9469-c46f1af39faf.png)
+
+
 ## API
 
 ### files
