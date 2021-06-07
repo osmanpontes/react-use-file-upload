@@ -17,9 +17,11 @@
     "url": "git+https://github.com/DZuz14/react-use-file-upload.git"
   },
   "keywords": [
-    "boilerplate",
-    "typescript",
-    "npm package boilerplate"
+    "upload",
+    "file uploading",
+    "files",
+    "react hook",
+    "use file upload"
   ],
   "author": "Daniel Zuzevich",
   "license": "MIT",
