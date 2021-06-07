@@ -12,8 +12,16 @@ import axios from 'axios';
 import useFileUpload from 'react-use-file-upload';
 
 const Upload = () => {
-  const { files, handleDragDropEvent, clearAllFiles, createFormData, setFiles, fileNames, fileTypes, removeFile } =
-    useFileUpload();
+  const { 
+    files, 
+    handleDragDropEvent, 
+    clearAllFiles, 
+    createFormData, 
+    setFiles, 
+    fileNames, 
+    fileTypes, 
+    removeFile 
+  } = useFileUpload();
 
   const inputRef = useRef();
 
@@ -79,7 +87,13 @@ const Upload = () => {
             <button onClick={() => inputRef.current.click()}>Or select files to upload</button>
 
             {/* Hide the crappy looking default HTML input */}
-            <input ref={inputRef} type="file" multiple style={{ display: 'none' }} onChange={(e) => setFiles(e, 'a')} />
+            <input 
+              ref={inputRef} 
+              type="file" 
+              multiple 
+              style={{ display: 'none' }} 
+              onChange={(e) => setFiles(e, 'a')} 
+            />
           </div>
         </div>
 
