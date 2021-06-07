@@ -12,16 +12,8 @@ import axios from 'axios';
 import useFileUpload from 'react-use-file-upload';
 
 const Upload = () => {
-  const { 
-    files, 
-    handleDragDropEvent, 
-    clearAllFiles, 
-    createFormData, 
-    setFiles, 
-    fileNames, 
-    fileTypes, 
-    removeFile 
-  } = useFileUpload();
+  const { files, handleDragDropEvent, clearAllFiles, createFormData, setFiles, fileNames, fileTypes, removeFile } =
+    useFileUpload();
 
   const inputRef = useRef();
 
@@ -45,62 +37,54 @@ const Upload = () => {
 
       <p>Please use the form to your right to upload any file(s) of your choosing.</p>
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-container">
-          {/* Display the files to be uploaded */}
-          <div css={ListCSS}>
-            <ul>
-              {fileNames.map((name) => (
-                <li key={name}>
-                  <span>{name}</span>
+      <div className="form-container">
+        {/* Display the files to be uploaded */}
+        <div css={ListCSS}>
+          <ul>
+            {fileNames.map((name) => (
+              <li key={name}>
+                <span>{name}</span>
 
-                  <span onClick={() => removeFile(name)}>
-                    <i className="fa fa-times" />
-                  </span>
-                </li>
-              ))}
-            </ul>
+                <span onClick={() => removeFile(name)}>
+                  <i className="fa fa-times" />
+                </span>
+              </li>
+            ))}
+          </ul>
 
-            {files.length > 0 && (
-              <div>
-                <span>File types found: {fileTypes.join(', ')}</span>
+          {files.length > 0 && (
+            <div>
+              <span>File types found: {fileTypes.join(', ')}</span>
 
-                <div className="clear-all">
-                  <button onClick={() => clearAllFiles()}>Clear All</button>
-                </div>
+              <div className="clear-all">
+                <button onClick={() => clearAllFiles()}>Clear All</button>
               </div>
-            )}
-          </div>
-
-          {/* Provide a drop zone and an alternative button inside it to upload files. */}
-          <div
-            css={DropzoneCSS}
-            onDragEnter={handleDragDropEvent}
-            onDragOver={handleDragDropEvent}
-            onDrop={(e) => {
-              handleDragDropEvent(e);
-              setFiles(e, 'a');
-            }}
-          >
-            <p>Drag and drop files here</p>
-
-            <button onClick={() => inputRef.current.click()}>Or select files to upload</button>
-
-            {/* Hide the crappy looking default HTML input */}
-            <input 
-              ref={inputRef} 
-              type="file" 
-              multiple 
-              style={{ display: 'none' }} 
-              onChange={(e) => setFiles(e, 'a')} 
-            />
-          </div>
+            </div>
+          )}
         </div>
 
-        <div className="submit">
-          <button type="submit">Submit</button>
+        {/* Provide a drop zone and an alternative button inside it to upload files. */}
+        <div
+          css={DropzoneCSS}
+          onDragEnter={handleDragDropEvent}
+          onDragOver={handleDragDropEvent}
+          onDrop={(e) => {
+            handleDragDropEvent(e);
+            setFiles(e, 'a');
+          }}
+        >
+          <p>Drag and drop files here</p>
+
+          <button onClick={() => inputRef.current.click()}>Or select files to upload</button>
+
+          {/* Hide the crappy looking default HTML input */}
+          <input ref={inputRef} type="file" multiple style={{ display: 'none' }} onChange={(e) => setFiles(e, 'a')} />
         </div>
-      </form>
+      </div>
+
+      <div className="submit">
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
 };
