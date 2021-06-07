@@ -1,6 +1,6 @@
 # React useFileUpload
 
-A React Hook to make uploading files easier. It extracts away a lot of the boilerplate that comes with allowing users to attach and upload files to your web application. The default browser implementation for [uploading files](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file) is lame, and doesn't allow you to remove attached files manually, or allow the user to select more files without deleting the previously attached ones.
+A React Hook to make uploading files easier. It extracts away a lot of the boilerplate that comes with allowing users to attach and upload files to your web application. The default browser implementation for [uploading files](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) is lame, and doesn't allow you to remove attached files manually, or allow the user to select more files without deleting the previously attached ones.
 
 This hook changes that, and allows you to remove, append, and write over files as you choose. You'll want to hide the default browser input, and create your own custom looking form.
 
