@@ -12,8 +12,18 @@ import axios from 'axios';
 import useFileUpload from 'react-use-file-upload';
 
 const Upload = () => {
-  const { files, handleDragDropEvent, clearAllFiles, createFormData, setFiles, fileNames, fileTypes, removeFile } =
-    useFileUpload();
+  const {
+    files,
+    fileNames,
+    fileTypes,
+    totalSize,
+    totalSizeInBytes,
+    handleDragDropEvent,
+    clearAllFiles,
+    createFormData,
+    setFiles,
+    removeFile,
+  } = useFileUpload();
 
   const inputRef = useRef();
 
@@ -53,13 +63,15 @@ const Upload = () => {
           </ul>
 
           {files.length > 0 && (
-            <div>
-              <span>File types found: {fileTypes.join(', ')}</span>
+            <ul>
+              <li>File types found: {fileTypes.join(', ')}</li>
+              <li>Total Size: {totalSize}</li>
+              <li>Total Bytes: {totalSizeInBytes}</li>
 
-              <div className="clear-all">
+              <li className="clear-all">
                 <button onClick={() => clearAllFiles()}>Clear All</button>
-              </div>
-            </div>
+              </li>
+            </ul>
           )}
         </div>
 
@@ -91,10 +103,8 @@ const Upload = () => {
 ```
 
 Here is a photo of the example app above:
-  
-  
-![example](https://user-images.githubusercontent.com/19492185/121057341-2b8e6300-c78d-11eb-9469-c46f1af39faf.png)
 
+![example](https://user-images.githubusercontent.com/19492185/121057341-2b8e6300-c78d-11eb-9469-c46f1af39faf.png)
 
 ## API
 
