@@ -2,17 +2,19 @@ import { useState, useCallback, useEffect } from 'react';
 import { useFileUploadHook } from './types';
 
 /**
- * @function bytesToSize
+ * @function formatBytes
  */
-const bytesToSize = (bytes: number): string => {
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  if (bytes === 0) return 'n/a';
+const formatBytes = (bytes: number, decimals = 2): string => {
+  if (typeof bytes !== 'number') return 'n/a';
+  if (bytes === 0) return '0 Bytes';
 
-  const log = (Math.log(bytes) / Math.log(1024)).toString();
-  const i = parseInt(log, 10);
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
-  if (i === 0) return `${bytes} ${sizes[i]}`;
-  return `${(bytes / 1024 ** i).toFixed(1)}${sizes[i]}`;
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 };
 
 /**
@@ -72,7 +74,7 @@ export const useFileUpload = (): useFileUploadHook => {
   /** @function handleSizes */
   const handleSizes = useCallback((files: File[]): void => {
     const sizeInBytes = getTotalSizeInBytes(files);
-    const prettySize = bytesToSize(sizeInBytes);
+    const prettySize = formatBytes(sizeInBytes);
     setTotalSizeInBytes(sizeInBytes);
     setTotalSize(prettySize);
   }, []);
