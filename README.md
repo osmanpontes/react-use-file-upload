@@ -33,7 +33,7 @@ const Upload = () => {
     const formData = createFormData();
 
     try {
-      axios.post('https://some-api.com', formData, {
+      axios.post('https://some-api.com', { files : formData }, {
         'content-type': 'multipart/form-data',
       });
     } catch (error) {
