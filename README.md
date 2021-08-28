@@ -118,7 +118,7 @@ File[]
 
 ### fileNames
 
-An array containing just the names of the files
+An array containing just the names of the files.
 
 ```
 string[]
