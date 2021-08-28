@@ -1,6 +1,6 @@
 {
   "name": "react-use-file-upload",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "A React Hook to make dealing with file uploading easier.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,10 +17,10 @@
     "url": "git+https://github.com/DZuz14/react-use-file-upload.git"
   },
   "keywords": [
-    "upload",
+    "react file upload",
+    "react hook file upload",
+    "upload file",
     "file uploading",
-    "files",
-    "react hook",
     "use file upload"
   ],
   "author": "Daniel Zuzevich",
