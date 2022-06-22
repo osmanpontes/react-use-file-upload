@@ -4,6 +4,11 @@ A React Hook to make uploading files easier. It extracts away a lot of the boile
 
 This hook changes that, and allows you to remove, append, and write over files as you choose. You'll want to hide the default browser input, and create your own custom looking form.
 
+## Installation
+Installation is simple.
+
+`npm i react-use-file-upload` or `yarn add react-use-file-upload`
+
 ## Usage
 
 ```js
