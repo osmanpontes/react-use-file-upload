@@ -89,7 +89,6 @@ const Upload = () => {
           onDrop={(e) => {
             handleDragDropEvent(e);
             setFiles(e, 'a');
-            inputRef.current.value = null;
           }}
         >
           <p>Drag and drop files here</p>
@@ -97,7 +96,16 @@ const Upload = () => {
           <button onClick={() => inputRef.current.click()}>Or select files to upload</button>
 
           {/* Hide the crappy looking default HTML input */}
-          <input ref={inputRef} type="file" multiple style={{ display: 'none' }} onChange={(e) => setFiles(e, 'a')} />
+          <input
+            ref={inputRef}
+            type="file"
+            multiple
+            style={{ display: 'none' }}
+            onChange={(e) => {
+              setFiles(e, 'a');
+              inputRef.current.value = null;
+            }}
+          />
         </div>
       </div>
 
