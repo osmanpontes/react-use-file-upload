@@ -113,7 +113,7 @@ describe('useFileUpload', () => {
 
     expect(result.current.files).toHaveLength(3);
 
-    act(() => result.current.removeFile('foo.txt'));
+    act(() => result.current.clearAllFiles());
     expect(result.current.files).toHaveLength(0);
   });
 });
