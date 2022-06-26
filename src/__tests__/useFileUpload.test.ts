@@ -70,6 +70,7 @@ describe('useFileUpload', () => {
     expect(result.current.files).toHaveLength(1);
 
     act(() => result.current.removeFile('foo.txt'));
+
     expect(result.current.files).toHaveLength(0);
   });
 
@@ -89,6 +90,7 @@ describe('useFileUpload', () => {
     expect(result.current.files).toHaveLength(3);
 
     act(() => result.current.clearAllFiles());
+
     expect(result.current.files).toHaveLength(0);
   });
 
