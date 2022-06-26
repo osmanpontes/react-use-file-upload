@@ -119,4 +119,21 @@ describe('useFileUpload', () => {
 
     expect(i).toEqual(2);
   });
+
+  /**
+   * Calculates the total size of the file pretty printed.
+   */
+  it('Calculates the total size of the file', () => {
+    const { result } = renderHook(() => useFileUpload());
+    const event = new Event('');
+
+    defineProperty(event, 'currentTarget', { files: [file, file] });
+
+    act(() => {
+      result.current.setFiles(event, 'a');
+    });
+
+    expect(result.current.totalSize).toEqual('6 Bytes');
+    expect(result.current.totalSizeInBytes).toEqual(6);
+  });
 });
