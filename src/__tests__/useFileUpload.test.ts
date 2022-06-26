@@ -121,7 +121,7 @@ describe('useFileUpload', () => {
   });
 
   /**
-   * Calculates the total size of the file pretty printed.
+   * Calculates the total size of the files.
    */
   it('Calculates the total size of the files', () => {
     const { result } = renderHook(() => useFileUpload());
