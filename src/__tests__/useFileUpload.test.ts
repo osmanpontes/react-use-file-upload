@@ -1,6 +1,16 @@
+/* eslint-disable */
+// @ts-nocheck
 import { act } from 'react-test-renderer';
 import { renderHook } from '@testing-library/react-hooks';
 import { useFileUpload } from '../lib/useFileUpload';
+
+const file = new File(['foo'], 'foo.txt', {
+  type: 'text/plain',
+});
+
+const defineProperty = (obj, key, value) => {
+  Object.defineProperty(obj, key, { writable: false, value });
+};
 
 describe('useFileUpload', () => {
   it('Its initial values are correct', () => {
@@ -12,21 +22,6 @@ describe('useFileUpload', () => {
     expect(result.current.totalSizeInBytes).toBe(0);
   });
 
-  it('exports five functions', () => {
-    const { result } = renderHook(() => useFileUpload());
-    expect(typeof result.current.clearAllFiles).toBe('function');
-    expect(typeof result.current.createFormData).toBe('function');
-    expect(typeof result.current.handleDragDropEvent).toBe('function');
-    expect(typeof result.current.removeFile).toBe('function');
-    expect(typeof result.current.setFiles).toBe('function');
-  });
-
-  it('appends the files into a new FormData for sending purposes', () => {
-    const { result } = renderHook(() => useFileUpload());
-    const formData = result.current.createFormData();
-    expect(formData instanceof FormData).toBe(true);
-  });
-
   /**
    * Adds new files via selection
    */
@@ -34,14 +29,9 @@ describe('useFileUpload', () => {
     const { result } = renderHook(() => useFileUpload());
     const event = new Event('');
 
-    const file = new File(['foo'], 'foo.txt', {
-      type: 'text/plain',
-    });
-
-    Object.defineProperty(event, 'currentTarget', { writable: false, value: { files: [file] } });
+    defineProperty(event, 'currentTarget', { files: [file] });
 
     act(() => {
-      // @ts-ignore
       result.current.setFiles(event, 'a');
     });
 
@@ -55,14 +45,9 @@ describe('useFileUpload', () => {
     const { result } = renderHook(() => useFileUpload());
     const event = new InputEvent('');
 
-    const file = new File(['foo'], 'foo.txt', {
-      type: 'text/plain',
-    });
-
-    Object.defineProperty(event, 'dataTransfer', { writable: false, value: { files: [file] } });
+    defineProperty(event, 'dataTransfer', { files: [file] });
 
     act(() => {
-      // @ts-ignore
       result.current.setFiles(event, 'a');
     });
 
@@ -76,14 +61,9 @@ describe('useFileUpload', () => {
     const { result } = renderHook(() => useFileUpload());
     const event = new Event('');
 
-    const file = new File(['foo'], 'foo.txt', {
-      type: 'text/plain',
-    });
-
-    Object.defineProperty(event, 'currentTarget', { writable: false, value: { files: [file] } });
+    defineProperty(event, 'currentTarget', { files: [file] });
 
     act(() => {
-      // @ts-ignore
       result.current.setFiles(event, 'a');
     });
 
@@ -100,14 +80,9 @@ describe('useFileUpload', () => {
     const { result } = renderHook(() => useFileUpload());
     const event = new Event('');
 
-    const file = new File(['foo'], 'foo.txt', {
-      type: 'text/plain',
-    });
-
-    Object.defineProperty(event, 'currentTarget', { writable: false, value: { files: [file, file, file] } });
+    defineProperty(event, 'currentTarget', { files: [file, file, file] });
 
     act(() => {
-      // @ts-ignore
       result.current.setFiles(event, 'a');
     });
 
@@ -115,5 +90,31 @@ describe('useFileUpload', () => {
 
     act(() => result.current.clearAllFiles());
     expect(result.current.files).toHaveLength(0);
+  });
+
+  /**
+   * Create FormData.
+   */
+  it('appends the files into a new FormData for sending purposes', () => {
+    const { result } = renderHook(() => useFileUpload());
+    const event = new Event('');
+
+    defineProperty(event, 'currentTarget', { files: [file, file] });
+
+    act(() => {
+      result.current.setFiles(event, 'a');
+    });
+
+    const formData = result.current.createFormData();
+    expect(formData instanceof FormData).toBe(true);
+
+    let i = 0;
+
+    for (const file of formData.values()) {
+      expect(file instanceof File).toBe(true);
+      i++;
+    }
+
+    expect(i).toEqual(2);
   });
 });
