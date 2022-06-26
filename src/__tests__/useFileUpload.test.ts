@@ -23,7 +23,7 @@ describe('useFileUpload', () => {
   });
 
   /**
-   * Adds new files via selection
+   * Adds new files via selection.
    */
   it('adds new files via selection', () => {
     const { result } = renderHook(() => useFileUpload());
@@ -123,7 +123,7 @@ describe('useFileUpload', () => {
   /**
    * Calculates the total size of the file pretty printed.
    */
-  it('Calculates the total size of the file', () => {
+  it('Calculates the total size of the files', () => {
     const { result } = renderHook(() => useFileUpload());
     const event = new Event('');
 
