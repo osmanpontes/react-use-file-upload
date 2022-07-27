@@ -8,5 +8,5 @@ export type useFileUploadHook = {
   createFormData: () => FormData;
   handleDragDropEvent: (e: Event) => void;
   removeFile: (file: number | string) => void;
-  setFiles: (e: Event) => void;
+  setFiles: (e: Event, mode?: 'a' | 'w') => void;
 };
