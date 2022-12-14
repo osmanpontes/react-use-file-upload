@@ -88,9 +88,9 @@ export const useFileUpload = (): useFileUploadHook => {
       }
 
       if (typeof file === 'string') {
-        setFilesState(files.filter((_file: File) => _file.name !== file));
+        setFilesState((previousFiles) => previousFiles.filter((_file: File) => _file.name !== file));
       } else {
-        setFilesState(files.filter((_file: File, i) => i !== file));
+        setFilesState((previousFiles) => previousFiles.filter((_file: File, i) => i !== file));
       }
     },
     [files],
