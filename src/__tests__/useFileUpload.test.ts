@@ -8,6 +8,10 @@ const file = new File(['foo'], 'foo.txt', {
   type: 'text/plain',
 });
 
+const barFile = new File(['bar'], 'bar.txt', {
+  type: 'text/plain',
+});
+
 const defineProperty = (obj, key, value) => {
   Object.defineProperty(obj, key, { writable: false, value });
 };
@@ -70,6 +74,54 @@ describe('useFileUpload', () => {
     expect(result.current.files).toHaveLength(1);
 
     act(() => result.current.removeFile('foo.txt'));
+
+    expect(result.current.files).toHaveLength(0);
+  });
+
+  /**
+   * Remove multiple files by name concurrently.
+   */
+  it('removes multiple files by name concurrently', () => {
+    const { result } = renderHook(() => useFileUpload());
+    const event = new Event('');
+
+    defineProperty(event, 'currentTarget', { files: [file, barFile] });
+
+    act(() => {
+      result.current.setFiles(event, 'a');
+    });
+
+    expect(result.current.files).toHaveLength(2);
+
+    act(() => {
+      ['foo.txt', 'bar.txt'].forEach((fileName) => {
+        result.current.removeFile(fileName);
+      });
+    });
+
+    expect(result.current.files).toHaveLength(0);
+  });
+
+  /**
+   * Remove multiple files by index concurrently.
+   */
+  it('removes multiple files by index concurrently', () => {
+    const { result } = renderHook(() => useFileUpload());
+    const event = new Event('');
+
+    defineProperty(event, 'currentTarget', { files: [file, barFile] });
+
+    act(() => {
+      result.current.setFiles(event, 'a');
+    });
+
+    expect(result.current.files).toHaveLength(2);
+
+    act(() => {
+      [1, 0].forEach((fileIndex) => {
+        result.current.removeFile(fileIndex);
+      });
+    });
 
     expect(result.current.files).toHaveLength(0);
   });
