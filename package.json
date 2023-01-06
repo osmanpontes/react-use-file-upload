@@ -1,5 +1,5 @@
 {
-  "name": "react-use-file-upload",
+  "name": "@osmanpontes/react-use-file-upload",
   "version": "0.9.5",
   "description": "A React Hook to make dealing with file uploading easier.",
   "main": "dist/index.js",
