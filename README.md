@@ -1,3 +1,7 @@
+## Note 
+
+This is a fork from [react-use-file-upload](https://www.npmjs.com/package/react-use-file-upload).
+
 # React useFileUpload
 
 A React Hook to make uploading files easier. It extracts away a lot of the boilerplate that comes with allowing users to attach and upload files to your web application. The default browser implementation for [uploading files](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications) is lame, and doesn't allow you to remove attached files manually, or allow the user to select more files without deleting the previously attached ones.
