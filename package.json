@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DZuz14/react-use-file-upload.git"
+    "url": "git+https://github.com/osmanpontes/react-use-file-upload.git"
   },
   "keywords": [
     "react file upload",
@@ -27,9 +27,9 @@
   "author": "Daniel Zuzevich",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DZuz14/react-use-file-upload/issues"
+    "url": "https://github.com/osmanpontes/react-use-file-upload/issues"
   },
-  "homepage": "https://github.com/DZuz14/react-use-file-upload#readme",
+  "homepage": "https://github.com/osmanpontes/react-use-file-upload#readme",
   "devDependencies": {
     "@testing-library/react-hooks": "^7.0.0",
     "@types/jest": "^26.0.15",
